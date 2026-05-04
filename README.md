@@ -144,12 +144,28 @@ FROM counts;
 
 ## Dashboard
 
-The cleaned dataset was visualized in Tableau to provide a business-facing view of the funnel and key purchase metrics.
+The cleaned dataset was visualized in Tableau to provide a business-facing overview of sales performance, customer behavior, and product demand.
 
-Dashboard included:
-- KPI cards: AOV, purchase sessions, revenue
-- Funnel: view → cart → purchase
-- Price distribution and demand heatmap
+Dashboard views include:
+- Monthly revenue trend
+- Monthly AOV trend
+- Funnel conversion: view → cart → purchase
+- Product demand heatmaps
+- Price distribution of purchased items
+
+### Funnel Conversion
+
+![Funnel Conversion](images/funnel_conversion.png)
+
+### Product Demand Heatmap
+
+![Product Demand Heatmap](images/demand_heatmap.png)
+
+### Price Distribution of Purchased Items
+
+![Price Distribution](images/price_distribution.png)
+
+Additional dashboard views are available in the [`images`](images/) folder.
 
 ## Business Outcome
 
