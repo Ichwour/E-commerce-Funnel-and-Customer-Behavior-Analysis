@@ -83,12 +83,14 @@ for col in numeric_cols:
 df = df.dropna(subset=["event_time", "price"])
 df.to_csv("data.csv", index=False)
 print("Clean dataset saved:", df.shape)
+```
 
 ## KPI Calculation: Average Order Value (AOV)
 
 AOV was calculated from purchase events using item-level transaction prices.  
 Since one session can contain multiple purchased products, order value was reconstructed by summing product prices within each purchase session.
 
+```sql
 SELECT
     AVG(order_sum) AS AOV
 FROM (
