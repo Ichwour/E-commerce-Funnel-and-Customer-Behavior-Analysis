@@ -1,6 +1,22 @@
 # E-commerce-Funnel-and-Customer-Behavior-Analysis
 E-commerce funnel and customer behavior analysis using SQL and Python
 
+## Problem
+
+The business needed to understand why users were browsing the catalog but not purchacing.
+
+## Approach
+
+I cleaned and normalized raw Shopify and sales data, calculated core purchase and funnel metrics, built dashboards of KPI metrics, and performed exploratory analysis to identify product discovery issues and prepare the analytical foundation for a future recommendation system.
+
+## Key Finding
+
+The largest funnel drop was found at the view→cart stage (~13%), indicating friction at the product discovery step rather than at checkout.
+
+## Next Step
+
+This finding motivated the [further recommendation system project](https://github.com/Ichwour/Personalized-Recommendation-System-ML-Pipeline), focused on improving product selection through personalized candidate ranking.
+
 ## Data Extraction & Cleaning Demo
 
 The raw Shopify export contained many technical and unstructured fields.  
@@ -122,11 +138,17 @@ SELECT
 FROM counts;
 ```
 
-## Key Insight
+- view → cart: ~13%
+- cart → purchase: ~40%
+- AOV: ~180 euro
 
-The view→cart conversion (~13%) is significantly lower than subsequent funnel stages, indicating a major drop at the product selection step.
-This suggests a potential friction in product discovery and selection.
+## Business Outcome
 
+The analysis identified the main funnel bottleneck at the view→cart stage (~13% conversion).
+This showed that the main issue was not checkout completion, but product discovery and selection.
+Based on this insight, the next analytical direction was to improve product discovery through recommendation-based candidate selection.
+
+## Additional pre-analysis for Recommendation System
 ## Candidate-Level Feature Analysis
 
 To understand which features separate true purchases from baseline candidates, I analyzed the candidate-level dataset generated from the baseline retrieval space.
