@@ -6,6 +6,7 @@ E-commerce funnel and customer behavior analysis using SQL and Python
 The raw Shopify export contained many technical and unstructured fields.  
 For analysis, I selected only the product attributes needed for customer behavior and sales analysis.
 
+```sql
 SELECT
     "Variant SKU" AS product_id,
     "Title" AS product_name,
@@ -21,9 +22,11 @@ SELECT
     "Wine Rating (product.metafields.wine.rating)" AS rating
 FROM products
 WHERE "Variant SKU" IS NOT NULL;
+```
 
 The next step was to connect sales history with product metadata and create an analysis-ready event table.
 
+```sql
 SELECT
     e."Client ID" AS client_id,
     e."Session ID" AS session_id,
@@ -36,17 +39,19 @@ SELECT
     p.product_price,
     p.country,
     p.region,
-    p.sweetness,
-    p.variety,
+    p.sugar,
+    p.varietals,
     p.product_year,
     p.rating,
     e."Price" AS price
 FROM events AS e
 LEFT JOIN products AS p
     ON e.product_id = p.product_id;
+```
     
 After joining the datasets, I performed basic validation and cleaning in pandas before saving the normalized analytical dataset.
 
+```python
 import pandas as pd
 
 df = pd.read_csv("event_products.csv")
@@ -54,7 +59,7 @@ print(df.shape)
 print(df.info())
 print(df.isna().sum())
 print(df.describe(include="all"))
-key_cols = ["client_id", "session_id", "event_time", "event_type", "product_id"]
+key_cols = ["client_id", "session_id", "event_time", "event_type", "product_id", "price"]
 df = df.dropna(subset=key_cols)
 text_cols = ["event_type", "country", "region", "sugar", "varietals", "vendor"]
 
@@ -75,7 +80,7 @@ for col in numeric_cols:
     if col in df.columns:
         df[col] = pd.to_numeric(df[col], errors="coerce")
 
-df = df.dropna(subset=["event_time"])
+df = df.dropna(subset=["event_time", "price"])
 df.to_csv("data.csv", index=False)
 print("Clean dataset saved:", df.shape)
 
@@ -94,9 +99,11 @@ FROM (
     WHERE event_type = 'purchase'
     GROUP BY session_id
 ) t;
+```
 
 Funnel conversion rates were calculated at the session level using unique session identifiers for each stage of the user journey.
 
+```sql
 WITH counts AS (
     SELECT
         COUNT(DISTINCT CASE WHEN event_type = 'view' THEN session_id END) AS view_sessions,
@@ -111,6 +118,7 @@ SELECT
     cart_sessions * 1.0 / view_sessions AS view_to_cart,
     purchase_sessions * 1.0 / cart_sessions AS cart_to_purchase
 FROM counts;
+```
 
 ## Key Insight
 
@@ -136,7 +144,8 @@ The analysis was performed using:
 - **Kolmogorov–Smirnov test** for numeric feature distributions
 - **Pearson correlation** for numeric feature association with the target label
 
-- from scipy.stats import chi2_contingency, ks_2samp, pearsonr
+```python
+from scipy.stats import chi2_contingency, ks_2samp, pearsonr
 
 contingency = pd.crosstab(df["vendor"], df["label"])
 chi2_stat, chi2_p, _, _ = chi2_contingency(contingency)
@@ -144,6 +153,7 @@ positive_price = df[df["label"] == 1]["price"].dropna()
 negative_price = df[df["label"] == 0]["price"].dropna()
 ks_stat, ks_p = ks_2samp(positive_price, negative_price)
 corr, corr_p = pearsonr(df["profile_score"], df["label"])
+```
 
 ### Results
 
