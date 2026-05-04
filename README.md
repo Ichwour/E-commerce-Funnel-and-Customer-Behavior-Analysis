@@ -142,6 +142,15 @@ FROM counts;
 - cart → purchase: ~40%
 - AOV: ~180 euro
 
+## Dashboard
+
+The cleaned dataset was visualized in Tableau to provide a business-facing view of the funnel and key purchase metrics.
+
+Dashboard included:
+- KPI cards: AOV, purchase sessions, revenue
+- Funnel: view → cart → purchase
+- Price distribution and demand heatmap
+
 ## Business Outcome
 
 The analysis identified the main funnel bottleneck at the view→cart stage (~13% conversion).
