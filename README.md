@@ -1,5 +1,5 @@
 # E-commerce-Funnel-and-Customer-Behavior-Analysis
-E-commerce funnel and customer behavior analysis using ***SQL***, ***Tableau*** and ***Python***
+E-commerce funnel and customer behavior analysis using **SQL**, **Tableau** and **Python**
 
 ## Problem
 
@@ -7,7 +7,7 @@ The business needed to understand why users were browsing the catalog but not pu
 
 ## Approach
 
-I cleaned and normalized raw Shopify and sales data, calculated core purchase and funnel metrics, built ***dashboards*** of ***KPI*** metrics, and performed exploratory analysis to identify product discovery issues.
+I cleaned and normalized raw Shopify and sales data, calculated core purchase and funnel metrics, built **dashboards** of **KPI** metrics, and performed exploratory analysis to identify product discovery issues.
 
 ## Key Finding
 
@@ -20,7 +20,7 @@ This finding motivated the [further recommendation system project](https://githu
 ## Data Extraction & Cleaning Demo
 
 The raw Shopify export contained many technical and unstructured fields.  
-Using ***SQL***, I selected only the product attributes needed for customer behavior and sales analysis.
+Using **SQL**, I selected only the product attributes needed for customer behavior and sales analysis.
 
 ```sql
 SELECT
@@ -65,7 +65,7 @@ LEFT JOIN products AS p
     ON e.product_id = p.product_id;
 ```
     
-After joining the datasets, I used ***Python*** and ***pandas*** to perform basic validation, clean missing and inconsistent values, standardize text fields, convert data types, and save the normalized analytical dataset.
+After joining the datasets, I used **Python** and **pandas** to perform basic validation, clean missing and inconsistent values, standardize text fields, convert data types, and save the normalized analytical dataset.
 
 ```python
 import pandas as pd
@@ -103,7 +103,7 @@ print("Clean dataset saved:", df.shape)
 
 ## KPI Calculation
 
-Using ***SQL***, I calculated the main business metrics needed for funnel and purchase behavior analysis.  
+Using **SQL**, I calculated the main business metrics needed for funnel and purchase behavior analysis.  
 The examples below show the calculation of Average Order Value (AOV) and session-level funnel conversion rates.
 
 AOV was calculated from purchase events using item-level transaction prices.  
@@ -147,7 +147,7 @@ FROM counts;
 
 ## Dashboard
 
-The cleaned dataset was visualized in ***Tableau*** to provide a business-facing overview of sales performance, customer behavior, and product demand.
+The cleaned dataset was visualized in **Tableau** to provide a business-facing overview of sales performance, customer behavior, and product demand.
 
 Dashboard views include:
 - Monthly revenue trend
@@ -176,5 +176,6 @@ The analysis identified the main funnel bottleneck at the view→cart stage (~14
 This showed that the main issue was not checkout completion, but product discovery and selection.
 Based on this insight, the next analytical direction was to improve product discovery through recommendation-based candidate selection.
 
-## Further analysis results were applied in a separate machine learning project focused on building a recommendation system to improve product discovery and selection:
+## Recommendation System
+Further analysis results were applied in a separate machine learning project focused on building a recommendation system to improve product discovery and selection:
 [Personalized Recommendation System ML Pipeline](https://github.com/Ichwour/Personalized-Recommendation-System-ML-Pipeline)
