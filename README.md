@@ -150,22 +150,24 @@ Dashboard views include:
 - Monthly revenue trend
 - Monthly AOV trend
 - Funnel conversion: view → cart → purchase
-- Product demand heatmaps
+- Product demand heatmap
 - Price distribution of purchased items
 
-### Price Distribution of Purchased Items
+### Monthly revenue trend
 
-![Price Distribution](images/price_distribution.png)
-
-### Funnel Conversion
-
-![Funnel Conversion](images/funnel_conversion.png)
+![Monthly revenue trend](images/Revenue Over Time.png)
 
 ### Product Demand Heatmap
 
-![Product Demand Heatmap](images/demand_heatmap.png)
+![Product Demand Heatmap](images/Product Demand Heatmap Color x Sugar.png)
 
-Additional dashboard views are available in the [`images`](images/) folder.
+### Executive Tableau Dashboard
+
+The final dashboard summarizes key e-commerce performance indicators, including total revenue, average order value, purchase sessions, unique customers, funnel conversion, monthly AOV dynamics, and the price distribution of purchased items.
+
+![Executive Tableau Dashboard](images/Dashboard 1.png)
+
+All dashboards are available in the [`images`](images/) folder.
 
 ## Business Outcome
 
