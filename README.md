@@ -1,5 +1,5 @@
 # E-commerce-Funnel-and-Customer-Behavior-Analysis
-E-commerce funnel and customer behavior analysis using SQL and Python
+E-commerce funnel and customer behavior analysis using ***SQL***, ***Tableau*** and ***Python***
 
 ## Problem
 
@@ -7,11 +7,11 @@ The business needed to understand why users were browsing the catalog but not pu
 
 ## Approach
 
-I cleaned and normalized raw Shopify and sales data, calculated core purchase and funnel metrics, built dashboards of KPI metrics, and performed exploratory analysis to identify product discovery issues and prepare the analytical foundation for a future recommendation system.
+I cleaned and normalized raw Shopify and sales data, calculated core purchase and funnel metrics, built ***dashboards*** of ***KPI*** metrics, and performed exploratory analysis to identify product discovery issues.
 
 ## Key Finding
 
-The largest funnel drop was found at the view→cart stage (~13%), indicating friction at the product discovery step rather than at checkout.
+The largest funnel drop was found at the view→cart stage (~14%), indicating friction at the product discovery step rather than at checkout.
 
 ## Next Step
 
@@ -20,7 +20,7 @@ This finding motivated the [further recommendation system project](https://githu
 ## Data Extraction & Cleaning Demo
 
 The raw Shopify export contained many technical and unstructured fields.  
-For analysis, I selected only the product attributes needed for customer behavior and sales analysis.
+Using ***SQL***, I selected only the product attributes needed for customer behavior and sales analysis.
 
 ```sql
 SELECT
@@ -65,7 +65,7 @@ LEFT JOIN products AS p
     ON e.product_id = p.product_id;
 ```
     
-After joining the datasets, I performed basic validation and cleaning in pandas before saving the normalized analytical dataset.
+After joining the datasets, I used ***Python*** and ***pandas*** to perform basic validation, clean missing and inconsistent values, standardize text fields, convert data types, and save the normalized analytical dataset.
 
 ```python
 import pandas as pd
@@ -101,7 +101,10 @@ df.to_csv("data.csv", index=False)
 print("Clean dataset saved:", df.shape)
 ```
 
-## KPI Calculation: Average Order Value (AOV)
+## KPI Calculation
+
+Using ***SQL***, I calculated the main business metrics needed for funnel and purchase behavior analysis.  
+The examples below show the calculation of Average Order Value (AOV) and session-level funnel conversion rates.
 
 AOV was calculated from purchase events using item-level transaction prices.  
 Since one session can contain multiple purchased products, order value was reconstructed by summing product prices within each purchase session.
@@ -138,40 +141,38 @@ SELECT
 FROM counts;
 ```
 
-- view → cart: ~13%
-- cart → purchase: ~40%
-- AOV: ~180 euro
+- view → cart: ~14%
+- cart → purchase: ~47%
+- AOV: ~79 euro
 
 ## Dashboard
 
-The cleaned dataset was visualized in Tableau to provide a business-facing overview of sales performance, customer behavior, and product demand.
+The cleaned dataset was visualized in ***Tableau*** to provide a business-facing overview of sales performance, customer behavior, and product demand.
 
 Dashboard views include:
 - Monthly revenue trend
-- Monthly AOV trend
-- Funnel conversion: view → cart → purchase
-- Product demand heatmap
-- Price distribution of purchased items
+- Funnel conversion: view → cart
+- Executive Tableau Dashboard including: complete Funnel conversion, monthly AOV trend, price distribution purchases
 
 ### Monthly revenue trend
 
-![Monthly revenue trend](images/Revenue Over Time.png)
+![Monthly revenue trend](images/RevenueOverTime.png)
 
-### Product Demand Heatmap
+### Funnel Conversion view → cart
 
-![Product Demand Heatmap](images/Product Demand Heatmap Color x Sugar.png)
+![Funnel Conversion](images/Funnel1.png)
 
 ### Executive Tableau Dashboard
 
 The final dashboard summarizes key e-commerce performance indicators, including total revenue, average order value, purchase sessions, unique customers, funnel conversion, monthly AOV dynamics, and the price distribution of purchased items.
 
-![Executive Tableau Dashboard](images/Dashboard 1.png)
+![Executive Tableau Dashboard](images/Dashboard.png)
 
 All dashboards are available in the [`images`](images/) folder.
 
 ## Business Outcome
 
-The analysis identified the main funnel bottleneck at the view→cart stage (~13% conversion).
+The analysis identified the main funnel bottleneck at the view→cart stage (~14% conversion).
 This showed that the main issue was not checkout completion, but product discovery and selection.
 Based on this insight, the next analytical direction was to improve product discovery through recommendation-based candidate selection.
 
