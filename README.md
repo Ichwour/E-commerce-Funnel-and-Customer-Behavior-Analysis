@@ -153,6 +153,10 @@ Dashboard views include:
 - Product demand heatmaps
 - Price distribution of purchased items
 
+### Price Distribution of Purchased Items
+
+![Price Distribution](images/price_distribution.png)
+
 ### Funnel Conversion
 
 ![Funnel Conversion](images/funnel_conversion.png)
@@ -160,10 +164,6 @@ Dashboard views include:
 ### Product Demand Heatmap
 
 ![Product Demand Heatmap](images/demand_heatmap.png)
-
-### Price Distribution of Purchased Items
-
-![Price Distribution](images/price_distribution.png)
 
 Additional dashboard views are available in the [`images`](images/) folder.
 
