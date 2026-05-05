@@ -156,11 +156,11 @@ Dashboard views include:
 
 ### Monthly revenue trend
 
-![Monthly revenue trend](images/RevenueOverTim.png)
+![Monthly revenue trend](images/RevenueOverTime.png)
 
 ### Funnel Conversion view → cart
 
-![Funnel Conversion](images/Funne.png)
+![Funnel Conversion](images/Funnel1.png)
 
 ### Executive Tableau Dashboard
 
