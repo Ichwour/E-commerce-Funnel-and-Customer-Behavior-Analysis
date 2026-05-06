@@ -145,18 +145,49 @@ FROM counts;
 - cart → purchase: ~47%
 - AOV: ~79 euro
 
+## Advanced Sales Analysis Using SQL Window Functions
+
+To analyze temporal sales dynamics, I used **SQL window** functions to calculate month-over-month revenue growth.
+
+```sql
+WITH monthly_revenue AS (
+    SELECT
+        DATE_TRUNC('month', event_time) AS month,
+        SUM(price) AS revenue
+    FROM data
+    WHERE event_type = 'purchase'
+    GROUP BY DATE_TRUNC('month', event_time)
+),
+
+monthly_growth AS (
+    SELECT
+        month,
+        revenue,
+        LAG(revenue) OVER (ORDER BY month) AS prev_revenue
+    FROM monthly_revenue
+)
+
+SELECT
+    month,
+    revenue,
+    prev_revenue,
+    (revenue - prev_revenue) * 1.0 / prev_revenue AS mom_growth
+FROM monthly_growth
+ORDER BY month;
+```
+
 ## Dashboard
 
 The cleaned dataset was visualized in **Tableau** to provide a business-facing overview of sales performance, customer behavior, and product demand.
 
 Dashboard views include:
-- Monthly revenue trend
+- Month-over-Month Revenue Growth
 - Funnel conversion: view → cart
 - Executive Tableau Dashboard including: complete Funnel conversion, monthly AOV trend, price distribution purchases
 
-### Monthly revenue trend
+### Month-over-Month Revenue Growth
 
-![Monthly revenue trend](images/RevenueOverTime.png)
+![Month-over-Month Revenue Growth](images/MoMGrowth.png)
 
 ### Funnel Conversion view → cart
 
