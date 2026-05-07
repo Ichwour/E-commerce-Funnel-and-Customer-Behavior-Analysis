@@ -187,7 +187,7 @@ Dashboard views include:
 
 ### Month-over-Month Revenue Growth
 
-![Month-over-Month Revenue Growth](images/MoMGrowth.png)
+![Month-over-Month Revenue Growth](images/MoMRevenueGrowth.png)
 
 ### Funnel Conversion view → cart
 
