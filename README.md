@@ -16,7 +16,8 @@ The largest funnel drop was found at the view→cart stage (~14%), indicating fr
 ## Next Step
 
 This finding motivated the [further recommendation system project](https://github.com/Ichwour/Personalized-Recommendation-System-ML-Pipeline), focused on improving product selection through personalized candidate ranking.
-<br>
+
+
 ## Data Extraction & Cleaning Demo
 
 The raw Shopify export contained many technical and unstructured fields.  
@@ -39,7 +40,7 @@ SELECT
 FROM products
 WHERE "Variant SKU" IS NOT NULL;
 ```
-<br>
+
 The next step was to connect sales history with product metadata and create an analysis-ready event table.
 
 ```sql
@@ -64,7 +65,7 @@ FROM events AS e
 LEFT JOIN products AS p
     ON e.product_id = p.product_id;
 ```
-<br>
+
 After joining the datasets, I used **Python** and **pandas** to perform basic validation, clean missing and inconsistent values, standardize text fields, convert data types, and save the normalized analytical dataset.
 
 ```python
@@ -100,7 +101,8 @@ df = df.dropna(subset=["event_time", "price"])
 df.to_csv("data.csv", index=False)
 print("Clean dataset saved:", df.shape)
 ```
-<br>
+
+
 ## KPI Calculation
 
 Using **SQL**, I calculated the main business metrics needed for funnel and purchase behavior analysis.  
@@ -121,7 +123,7 @@ FROM (
     GROUP BY session_id
 ) t;
 ```
-<br>
+
 Funnel conversion rates were calculated at the session level using unique session identifiers for each stage of the user journey.
 
 ```sql
@@ -144,7 +146,8 @@ FROM counts;
 - view → cart: ~14%
 - cart → purchase: ~47%
 - AOV: ~79 euro
-<br>
+
+
 ## Advanced Sales Analysis Using SQL Window Functions
 
 To analyze temporal sales dynamics, I used **SQL window** functions to calculate month-over-month revenue growth.
@@ -176,6 +179,7 @@ FROM monthly_growth
 ORDER BY month;
 ```
 
+
 ## Dashboard
 
 The cleaned dataset was visualized in **Tableau** to provide a business-facing overview of sales performance, customer behavior, and product demand.
@@ -184,15 +188,18 @@ Dashboard views include:
 - Month-over-Month Revenue Growth
 - Funnel conversion: view → cart
 - Executive Tableau Dashboard including: complete Funnel conversion, monthly AOV trend, price distribution purchases
-<br>
+
+
 ### Month-over-Month Revenue Growth
 
 ![Month-over-Month Revenue Growth](images/MOMRevenueGrowth.png)
-<br>
+
+
 ### Funnel Conversion view → cart
 
 ![Funnel Conversion](images/Funnel1.png)
-<br>
+
+
 ### Executive Tableau Dashboard
 
 The final dashboard summarizes key e-commerce performance indicators, including total revenue, average order value, purchase sessions, unique customers, funnel conversion, monthly AOV dynamics, and the price distribution of purchased items.
@@ -200,13 +207,15 @@ The final dashboard summarizes key e-commerce performance indicators, including 
 ![Executive Tableau Dashboard](images/Dashboard.png)
 
 All dashboards are available in the [`images`](images/) folder.
-<br>
+
+
 ## Business Outcome
 
 The analysis identified the main funnel bottleneck at the view→cart stage (~14% conversion).
 This showed that the main issue was not checkout completion, but product discovery and selection.
 Based on this insight, the next analytical direction was to improve product discovery through recommendation-based candidate selection.
-<br>
+
+
 ## Recommendation System
 
 Further analysis results were applied in a separate machine learning project focused on building a recommendation system to improve product discovery and selection:
