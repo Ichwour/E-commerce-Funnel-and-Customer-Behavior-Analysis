@@ -39,7 +39,7 @@ SELECT
 FROM products
 WHERE "Variant SKU" IS NOT NULL;
 ```
-
+<br>
 The next step was to connect sales history with product metadata and create an analysis-ready event table.
 
 ```sql
