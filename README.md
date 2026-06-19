@@ -3,7 +3,7 @@ E-commerce funnel and customer behavior analysis using **SQL**, **Tableau** and 
 
 ## Problem
 
-The business needed to understand why users were browsing the catalog but not purchacing.
+The business needed to understand why users were browsing the catalog but not purchasing.
 
 ## Approach
 
